@@ -13,7 +13,7 @@ This package provides a simple and efficient way to convert HTML strings into Co
 Install the package using npm:
 
 ```bash
-npm install [your-package-name]
+npm install html-to-contentful-json
 ```
 
 ## Usage
@@ -21,12 +21,20 @@ npm install [your-package-name]
 To use the converter, simply import the `htmlToContentfulRichText` function from the package and pass your HTML string to it.
 
 ```javascript
-const htmlToContentfulRichText = require('[your-package-name]');
+const htmlToContentfulRichText = require('html-to-contentful-json');
 
 const htmlString = `<p>Hello, World!</p>`;
 const richText = await htmlToContentfulRichText(htmlString);
 
 console.log(richText);
+```
+
+## Usage for TypeScript Projects
+
+If you are using this package in a TypeScript project, you should import the `htmlToContentfulRichText` function using the following syntax:
+
+```typescript
+import * as htmlToContentfulRichText from 'html-to-contentful-json';
 ```
 
 ### Advanced Configuration
