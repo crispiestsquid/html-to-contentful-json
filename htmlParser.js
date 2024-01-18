@@ -38,7 +38,7 @@ async function htmlToContentfulRichText(html, configuration) {
               'Missing configuration for uploading images to Contentful... Please provide spaceId, environmentId, accessToken, and locale.'
             );
           }
-          const imageNode = await createImageNode($(element));
+          const imageNode = await createImageNode($(element), configuration);
           content.push(imageNode);
         }
         break;
