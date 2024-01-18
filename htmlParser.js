@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const { createImageNode } = require('./contentfulManagement');
+const { mergeAdjacentBlockquotesInJson } = require('./utilities');
 
 async function htmlToContentfulRichText(html, configuration) {
   const $ = cheerio.load(html);

@@ -1,4 +1,5 @@
 const contentfulManagement = require('contentful-management');
+const { getFileNameAndContentType } = require('./utilities');
 
 async function createImageNode(imgElement, configuration) {
   const imageUrl = imgElement.attr('src');
