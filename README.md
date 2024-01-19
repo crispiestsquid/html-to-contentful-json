@@ -8,6 +8,21 @@ This package provides a simple and efficient way to convert HTML strings into Co
 - Optional automatic image uploading to Contentful as assets.
 - Configurable options to tailor the conversion process to your needs.
 
+## Supported Formatting Options
+
+- `bold`
+- `italics`
+- `underline`
+- `hyperlink`
+- `blockquote`
+- `p` (paragraph)
+- `h2` (header 2)
+- `ul` (unordered list)
+- `ol` (ordered list)
+- `hr` (horizontal rule)
+
+More options will be added in future updates.
+
 ## Installation
 
 Install the package using npm:
@@ -16,7 +31,7 @@ Install the package using npm:
 npm install html-to-contentful-json
 ```
 
-## Usage
+## Usage (CommonJS)
 
 To use the converter, simply import the `htmlToContentfulRichText` function from the package and pass your HTML string to it.
 
@@ -29,9 +44,9 @@ const richText = await htmlToContentfulRichText(htmlString);
 console.log(richText);
 ```
 
-## Usage for TypeScript Projects
+## Usage for ES6 Projects
 
-If you are using this package in a TypeScript project, you should import the `htmlToContentfulRichText` function using the following syntax:
+If you are using this package in a project that utilizes ES6 (ECMAScript 2015) module imports, you should import the `htmlToContentfulRichText` function using the following syntax:
 
 ```typescript
 import * as htmlToContentfulRichText from 'html-to-contentful-json';
