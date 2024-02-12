@@ -122,10 +122,16 @@ function parseElement($, element) {
 }
 
 function parseNodeWithMark($, element, markType) {
-  return parseNodeContents($, element).map((node) => ({
-    ...node,
-    marks: node.marks.concat([{ type: markType }]),
-  }));
+  return parseNodeContents($, element).map((node) => {
+    // Initialize marks array if not present
+    if (!node.marks) {
+      node.marks = [];
+    }
+    return {
+      ...node,
+      marks: node.marks.concat([{ type: markType }]),
+    };
+  });
 }
 
 function parseNodeContents($, element) {

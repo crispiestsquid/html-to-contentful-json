@@ -1,6 +1,6 @@
 {
   "name": "html-to-contentful-json",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "convert html to contentful json format",
   "main": "index.js",
   "scripts": {
