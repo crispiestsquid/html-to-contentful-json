@@ -4,6 +4,10 @@ const { mergeAdjacentBlockquotesInJson } = require('./utilities');
 
 async function htmlToContentfulRichText(html, configuration) {
   const $ = cheerio.load(html);
+
+  // First ensure that inline styles around anchor tags are fixed
+  fixInlineStylesAroundAnchors($);
+
   let content = [];
   const elements = $('body').children().toArray();
 
@@ -122,16 +126,10 @@ function parseElement($, element) {
 }
 
 function parseNodeWithMark($, element, markType) {
-  return parseNodeContents($, element).map((node) => {
-    // Initialize marks array if not present
-    if (!node.marks) {
-      node.marks = [];
-    }
-    return {
-      ...node,
-      marks: node.marks.concat([{ type: markType }]),
-    };
-  });
+  return parseNodeContents($, element).map((node) => ({
+    ...node,
+    marks: node.marks.concat([{ type: markType }]),
+  }));
 }
 
 function parseNodeContents($, element) {
@@ -185,6 +183,27 @@ function parseListNode($, listNode, nodeType) {
     data: {},
     content: items,
   };
+}
+
+function fixInlineStylesAroundAnchors($) {
+  // Define a list of inline style tags to check
+  const inlineStyleTags = ['strong', 'em', 'b', 'i', 'u'];
+
+  inlineStyleTags.forEach((tag) => {
+    $(`${tag} a`).each(function () {
+      const outerTag = $(this).parent(tag);
+      if (outerTag.length) {
+        // Clone the anchor tag to preserve its content and attributes
+        const anchorClone = $(this).clone();
+
+        // Replace the anchor tag's content with the inline style tag wrapping its original content
+        anchorClone.html(`<${tag}>${anchorClone.html()}</${tag}>`);
+
+        // Replace the original inline style + anchor combination with the modified anchor clone
+        outerTag.replaceWith(anchorClone);
+      }
+    });
+  });
 }
 
 module.exports = {
